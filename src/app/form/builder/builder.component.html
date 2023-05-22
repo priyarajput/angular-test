@@ -1,0 +1,40 @@
+<div class="mb-10">
+    <button (click)="openDialog()" *ngIf="questions().value.length === 0">Add Question</button>
+</div>
+
+
+<mat-card class="form-builder mt-10 w-full">
+    <mat-card-content>
+        <form [formGroup]="form">
+            <div formArrayName="questions">
+                <div class="mb-10" *ngFor="let option of questions().controls; let i=index">
+                    <div [formGroupName]="i">
+                        <label>Q{{i+1}} : {{option.value.question}}</label>
+                        <ng-container
+                            *ngIf="option.value.type === 'checkbox'; then thenTemplate; else elseTemplate"></ng-container>
+                        <ng-template #thenTemplate>
+                            <div formArrayName="options">
+                                <div class="mt-10" *ngFor="let skill of skills(i).controls; let skillIndex=index">
+                                    <div [formGroupName]="skillIndex">
+                                        <input type="checkbox" [id]="skillIndex" [name]="skillIndex"
+                                            [checked]="skill.value.checked" formControlName="checked">
+                                        <label>{{skill.value.value}}</label><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template #elseTemplate>
+                            <div>
+                                <textarea class="box mt-10 mb-10" type="text" formControlName="answer"></textarea>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <a (click)="openDialog()" class="add-question mt-10" *ngIf="questions().value.length > 0">+ Add More Question</a>
+            <div class="example-button-row mt-10" *ngIf="questions().value.length > 0">
+                <button (click)="redirectTo()" [disabled]="form.invalid">Review My answer</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

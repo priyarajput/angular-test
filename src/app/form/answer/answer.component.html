@@ -1,0 +1,25 @@
+<mat-card class="form-builder mt-10 w-full">
+    <mat-card-content>
+        <div *ngFor="let item of displayAnswer; let i=index">
+            <label class="mb-10">Q{{i+1}} : {{item.question}}</label>
+            <ng-container *ngIf="item.type === 'checkbox'; then thenTemplate; else elseTemplate"></ng-container>
+            <ng-template #thenTemplate>
+               <ul>
+                <ng-container  *ngFor="let option of item.options">
+                    <li *ngIf="option.checked">
+                        {{option.value}}
+                    </li>
+                </ng-container>
+               </ul>
+            </ng-template>
+            <ng-template #elseTemplate>
+                <p class="mt-10">{{item.answer}}</p>
+            </ng-template>
+                       
+        </div>
+    </mat-card-content>
+
+    <div class="example-button-row">
+        <button routerLink="/form/builder">Back To Form Builder</button>
+    </div>
+</mat-card>

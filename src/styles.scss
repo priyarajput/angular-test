@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding: 20px; }
+
+.mt-10{
+ margin-top: 10px;
+}
+.mb-10{
+ margin-bottom: 10px;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+
+.form-builder{
+    .w-full{
+        width: 100%;
+    }
+    label{
+        font-weight: 500;
+    }
+    .box{
+        border: 1px solid #000;
+        padding: 10px;
+        width: 70%;
+    }
+    .add-question{
+        color: blue;
+        text-decoration: underline;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .mat-form-field-infix{
+width: 100%;
+    }
+}

@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Add a new questions</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <div class="form-builder mt-10 w-full">
+            <div class="example-form-fields">
+                <mat-form-field>
+                    <input matInput formControlName="question" placeholder="Type Question Here" required>
+                    <mat-error *ngIf="form['controls']['question'].invalid ">This field is reuired.</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="example-form-fields">
+                <label>Type: </label>
+                <div class="mt-10 mb-10">
+                    <mat-radio-group formControlName="type">
+                        <mat-radio-button  (change)="radioChange($event)" value="checkbox">Checkbox</mat-radio-button>
+                        <mat-radio-button class="ml-10" (change)="radioChange($event)" value="textarea">Textarea</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <ng-container *ngIf="form.value.type === 'checkbox'">
+                <label>Options:</label>
+                <div formArrayName="options" class="mt-10 mb-10">
+                    <ul *ngFor="let option of options.controls; let i=index">
+                        <li [formGroupName]="i">
+                            <input type="text" formControlName="value">
+                            <button (click)="removeOption(i)" class="ml-10">Remove</button>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <button (click)="addOptions()" class="mt-10">Add Options</button>
+                </div>
+            </ng-container>
+            <div>
+                <button (click)="confirm()" class="mt-10" [disabled]="form.invalid">Submit</button>
+            </div>
+
+        </div>
+    </form>
+</div>
